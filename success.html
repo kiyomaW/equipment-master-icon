@@ -1,73 +1,127 @@
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Equipment Registered</title>
+  <link rel="apple-touch-icon" href="https://kiyomaw.github.io/equipment-master-icon/icon.png.png">
+  <meta name="apple-mobile-web-app-title" content="New Equipment">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Equipment Registered</title>
 
-<style>
-body{
-font-family:Arial;
-padding:20px;
-max-width:420px;
-margin:auto;
-}
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #fff;
+    }
 
-.btn{
-display:block;
-background:#673ab7;
-color:white;
-padding:18px;
-text-align:center;
-text-decoration:none;
-border-radius:10px;
-margin-top:15px;
-}
+    .page {
+      max-width: 420px;
+      margin: 0 auto;
+      padding-top: 40px;
+    }
 
-.btn2{
-display:block;
-background:#444;
-color:white;
-padding:18px;
-text-align:center;
-text-decoration:none;
-border-radius:10px;
-margin-top:15px;
-}
-</style>
+    h1 {
+      font-size: 30px;
+      margin-bottom: 24px;
+    }
+
+    .label {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .value {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 22px;
+    }
+
+    .qr {
+      text-align: center;
+      margin: 25px 0;
+    }
+
+    .qr img {
+      width: 240px;
+      height: 240px;
+    }
+
+    .btn {
+      display: block;
+      background: #673ab7;
+      color: white;
+      padding: 18px;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 10px;
+      margin-top: 15px;
+      font-size: 18px;
+    }
+
+    .btn2 {
+      display: block;
+      background: #444;
+      color: white;
+      padding: 18px;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 10px;
+      margin-top: 15px;
+      font-size: 18px;
+    }
+
+    .note {
+      margin-top: 20px;
+      color: #666;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="page">
+    <h1>✓ Equipment Registered</h1>
 
-<h1>✓ Equipment Registered</h1>
+    <div class="label">Equipment ID</div>
+    <div class="value" id="eq"></div>
 
-<div id="info"></div>
+    <div class="label">Equipment Name</div>
+    <div class="value" id="name"></div>
 
-<a id="maintenance" class="btn">
-Add Maintenance Record
-</a>
+    <div class="qr">
+      <img id="qr">
+    </div>
 
-<a href="https://kiyomaw.github.io/equipment-master-icon/"
-class="btn2">
-Register Another Equipment
-</a>
+    <a id="maintenance" class="btn">Add Maintenance Record</a>
 
-<script>
+    <a href="https://kiyomaw.github.io/equipment-master-icon/" class="btn2">
+      Register Another Equipment
+    </a>
 
-const p = new URLSearchParams(location.search);
+    <div class="note">
+      QR label has been created automatically in Equipment Master.
+    </div>
+  </div>
 
-const eq = p.get("eq");
-const name = p.get("name");
+  <script>
+    const p = new URLSearchParams(location.search);
 
-document.getElementById("info").innerHTML =
-`
-<p><b>Equipment ID</b><br>${eq}</p>
-<p><b>Equipment Name</b><br>${name}</p>
-`;
+    const eq = p.get("eq");
+    const name = p.get("name");
 
-document.getElementById("maintenance").href =
-"https://docs.google.com/forms/d/e/1FAIpQLSdaeiMfoWbh83KHSlC2rk9YBOG29o8O8YT5x9FFIVDW3QaOAw/viewform?usp=pp_url&entry.1818261576="
-+ eq;
+    const webAppUrl = "https://script.google.com/macros/s/AKfycbw_bwxxQVqE4jAvmL-MNtBDtl36pX_bp1jUHCcKL9vWP1YMrAZAllirqi9kUuw8_tXP/exec";
+    const portalUrl = webAppUrl + "?id=" + eq;
 
-</script>
+    document.getElementById("eq").textContent = eq;
+    document.getElementById("name").textContent = name;
 
+    document.getElementById("qr").src =
+      "https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=" +
+      encodeURIComponent(portalUrl);
+
+    document.getElementById("maintenance").href =
+      "https://docs.google.com/forms/d/e/1FAIpQLSdaeiMfoWbh83KHSlC2rk9YBOG29o8O8YT5x9FFIVDW3QaOAw/viewform?usp=pp_url&entry.1818261576=" + eq;
+  </script>
 </body>
 </html>
