@@ -1,0 +1,73 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Equipment Registered</title>
+
+<style>
+body{
+font-family:Arial;
+padding:20px;
+max-width:420px;
+margin:auto;
+}
+
+.btn{
+display:block;
+background:#673ab7;
+color:white;
+padding:18px;
+text-align:center;
+text-decoration:none;
+border-radius:10px;
+margin-top:15px;
+}
+
+.btn2{
+display:block;
+background:#444;
+color:white;
+padding:18px;
+text-align:center;
+text-decoration:none;
+border-radius:10px;
+margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>✓ Equipment Registered</h1>
+
+<div id="info"></div>
+
+<a id="maintenance" class="btn">
+Add Maintenance Record
+</a>
+
+<a href="https://kiyomaw.github.io/equipment-master-icon/"
+class="btn2">
+Register Another Equipment
+</a>
+
+<script>
+
+const p = new URLSearchParams(location.search);
+
+const eq = p.get("eq");
+const name = p.get("name");
+
+document.getElementById("info").innerHTML =
+`
+<p><b>Equipment ID</b><br>${eq}</p>
+<p><b>Equipment Name</b><br>${name}</p>
+`;
+
+document.getElementById("maintenance").href =
+"https://docs.google.com/forms/d/e/1FAIpQLSdaeiMfoWbh83KHSlC2rk9YBOG29o8O8YT5x9FFIVDW3QaOAw/viewform?usp=pp_url&entry.1818261576="
++ eq;
+
+</script>
+
+</body>
+</html>
