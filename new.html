@@ -1,1 +1,93 @@
+<html>
+<head>
+  <link rel="apple-touch-icon" href="https://kiyomaw.github.io/equipment-master-icon/icon.png.png">
+  <meta name="apple-mobile-web-app-title" content="Equipment Master">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>New Equipment</title>
 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #ffffff;
+    }
+
+    .page {
+      max-width: 420px;
+      margin: 0 auto;
+      padding-top: 40px;
+    }
+
+    h1 {
+      font-size: 34px;
+      margin-bottom: 28px;
+    }
+
+    label {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 16px;
+      font-size: 20px;
+      margin-top: 10px;
+      margin-bottom: 16px;
+      border: 1px solid #bbb;
+      border-radius: 10px;
+    }
+
+    button {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 18px;
+      font-size: 22px;
+      background: #673ab7;
+      color: white;
+      border: 0;
+      border-radius: 12px;
+    }
+
+    .note {
+      margin-top: 24px;
+      color: #666;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <h1>New Equipment</h1>
+
+    <label>Equipment Name</label>
+    <input id="name" placeholder="Example: 1250KVA No.13">
+
+    <button onclick="registerEquipment()">Register</button>
+
+    <div class="note">
+      This will create a new Equipment ID, QR URL, and QR label automatically.
+    </div>
+  </div>
+
+  <script>
+    function registerEquipment() {
+      const name = document.getElementById("name").value.trim();
+
+      if (!name) {
+        alert("Enter equipment name");
+        return;
+      }
+
+      const appUrl = "https://script.google.com/macros/s/AKfycbw_bwxxQVqE4jAvmL-MNtBDtl36pX_bp1jUHCcKL9vWP1YMrAZAllirqi9kUuw8_tXP/exec";
+
+      window.location.href =
+        appUrl + "?id=register&name=" + encodeURIComponent(name);
+    }
+  </script>
+</body>
+</html>
