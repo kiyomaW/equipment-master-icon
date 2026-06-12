@@ -1,9 +1,9 @@
 <html>
 <head>
   <link rel="apple-touch-icon" href="https://kiyomaw.github.io/equipment-master-icon/icon.png.png">
-  <meta name="apple-mobile-web-app-title" content="New Equipment">
+  <meta name="apple-mobile-web-app-title" content="Equipment Master">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>New Equipment</title>
+  <title>Equipment Master</title>
 
   <style>
     body {
@@ -16,12 +16,18 @@
     .page {
       max-width: 420px;
       margin: 0 auto;
-      padding-top: 40px;
+      padding-top: 35px;
     }
 
     h1 {
-      font-size: 32px;
-      margin-bottom: 24px;
+      font-size: 34px;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-top: 28px;
+      margin-bottom: 12px;
     }
 
     label {
@@ -35,20 +41,37 @@
       padding: 16px;
       font-size: 18px;
       margin-top: 8px;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       border: 1px solid #bbb;
       border-radius: 8px;
     }
 
-    button {
+    button, .btn {
       width: 100%;
       box-sizing: border-box;
+      display: block;
       padding: 18px;
-      font-size: 20px;
-      background: #673ab7;
-      color: white;
+      font-size: 18px;
+      text-align: center;
+      text-decoration: none;
       border: 0;
       border-radius: 10px;
+      margin-top: 12px;
+    }
+
+    .primary {
+      background: #673ab7;
+      color: white;
+    }
+
+    .dark {
+      background: #444;
+      color: white;
+    }
+
+    .light {
+      background: #eeeeee;
+      color: #111;
     }
 
     .note {
@@ -57,34 +80,57 @@
       font-size: 14px;
       line-height: 1.5;
     }
+
+    .section {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+    }
   </style>
 </head>
 
 <body>
   <div class="page">
-    <h1>New Equipment</h1>
+    <h1>Equipment Master</h1>
 
-    <label>Equipment Name</label>
-    <input id="name" placeholder="Example: 1250KVA No.13">
+    <a class="btn primary" href="new.html">
+      + New Equipment
+    </a>
 
-    <button onclick="registerEquipment()">Register</button>
+    <div class="section">
+      <h2>Open Equipment</h2>
+
+      <label>Equipment ID</label>
+      <input id="equipmentId" placeholder="Example: EQ0018">
+
+      <button class="primary" onclick="openEquipment()">
+        Open Equipment
+      </button>
+    </div>
+
+    <div class="section">
+      <a class="btn dark"
+         href="https://script.google.com/macros/s/AKfycbw_bwxxQVqE4jAvmL-MNtBDtl36pX_bp1jUHCcKL9vWP1YMrAZAllirqi9kUuw8_tXP/exec?id=print">
+        Print QR Labels
+      </a>
+    </div>
 
     <div class="note">
-      This will create a new Equipment ID, QR URL, and QR label automatically.
+      Use this page to register equipment, open maintenance history, and print QR labels.
     </div>
   </div>
 
   <script>
-    function registerEquipment() {
-      const name = document.getElementById("name").value.trim();
+    function openEquipment() {
+      const id = document.getElementById("equipmentId").value.trim().toUpperCase();
 
-      if (!name) {
-        alert("Enter equipment name");
+      if (!id) {
+        alert("Enter Equipment ID");
         return;
       }
 
       const appUrl = "https://script.google.com/macros/s/AKfycbw_bwxxQVqE4jAvmL-MNtBDtl36pX_bp1jUHCcKL9vWP1YMrAZAllirqi9kUuw8_tXP/exec";
-      window.location.href = appUrl + "?id=register&name=" + encodeURIComponent(name);
+      window.location.href = appUrl + "?id=" + encodeURIComponent(id);
     }
   </script>
 </body>
