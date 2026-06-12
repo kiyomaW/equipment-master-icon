@@ -114,7 +114,10 @@
         Print QR Labels
       </a>
     </div>
-
+<div class="section">
+  <h2>Recent Equipment</h2>
+  <div id="equipmentList">Loading...</div>
+</div>
     <div class="note">
       Use this page to register equipment, open maintenance history, and print QR labels.
     </div>
@@ -133,5 +136,28 @@
       window.location.href = appUrl + "?id=" + encodeURIComponent(id);
     }
   </script>
+  <script>
+  function loadEquipmentList(items) {
+    const list = document.getElementById("equipmentList");
+
+    list.innerHTML = items.slice(0, 10).map(item => `
+      <a href="${item.url}" style="
+        display:block;
+        padding:14px;
+        margin:8px 0;
+        border:1px solid #ddd;
+        border-radius:10px;
+        text-decoration:none;
+        color:#111;
+        font-size:16px;
+      ">
+        <b>${item.id}</b><br>
+        ${item.name}
+      </a>
+    `).join("");
+  }
+</script>
+
+<script src="https://script.google.com/macros/s/AKfycbw_bwxxQVqE4jAvmL-MNtBDtl36pX_bp1jUHCcKL9vWP1YMrAZAllirqi9kUuw8_tXP/exec?id=list"></script>
 </body>
 </html>
