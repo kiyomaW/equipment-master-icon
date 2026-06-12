@@ -98,14 +98,12 @@
     </a>
 
     <div class="section">
-      <h2>Open Equipment</h2>
+      <h2>Search Equipment</h2>
 
-      <label>Equipment ID</label>
-      <input id="equipmentId" placeholder="Example: EQ0018">
+<label>Equipment ID or Name</label>
+<input id="equipmentSearch" placeholder="Example: BP71, 1100, EQ0019" oninput="filterEquipment()">
 
-      <button class="primary" onclick="openEquipment()">
-        Open Equipment
-      </button>
+<div id="searchResults"></div>
     </div>
 
     <div class="section">
@@ -124,18 +122,59 @@
   </div>
 
   <script>
-    function openEquipment() {
-      const id = document.getElementById("equipmentId").value.trim().toUpperCase();
+   let allEquipment = [];
 
-      if (!id) {
-        alert("Enter Equipment ID");
-        return;
-      }
+  function loadEquipmentList(items) {
+    allEquipment = items;
 
-      const appUrl = "https://script.google.com/macros/s/AKfycbw_bwxxQVqE4jAvmL-MNtBDtl36pX_bp1jUHCcKL9vWP1YMrAZAllirqi9kUuw8_tXP/exec";
-      window.location.href = appUrl + "?id=" + encodeURIComponent(id);
+    renderRecentEquipment(items.slice(0, 10));
+  }
+
+  function renderRecentEquipment(items) {
+    const list = document.getElementById("equipmentList");
+
+    list.innerHTML = items.map(item => equipmentCard(item)).join("");
+  }
+
+  function filterEquipment() {
+    const keyword = document.getElementById("equipmentSearch").value.trim().toLowerCase();
+    const results = document.getElementById("searchResults");
+
+    if (!keyword) {
+      results.innerHTML = "";
+      return;
     }
-  </script>
+
+    const filtered = allEquipment.filter(item =>
+      item.id.toLowerCase().includes(keyword) ||
+      String(item.name).toLowerCase().includes(keyword)
+    ).slice(0, 10);
+
+    results.innerHTML = filtered.length
+      ? filtered.map(item => equipmentCard(item)).join("")
+      : "<p style='color:#666;'>No equipment found.</p>";
+  }
+
+  function equipmentCard(item) {
+    return `
+      <a href="${item.url}" style="
+        display:block;
+        padding:14px;
+        margin:8px 0;
+        border:1px solid #ddd;
+        border-radius:10px;
+        text-decoration:none;
+        color:#111;
+        font-size:16px;
+      ">
+        <b>${item.id}</b><br>
+        ${item.name}
+      </a>
+    `;
+  }
+</script>
+
+<script src="https://script.google.com/macros/s/AKfycbw_bwxxQVqE4jAvmL-MNtBDtl36pX_bp1jUHCcKL9vWP1YMrAZAllirqi9kUuw8_tXP/exec?id=list"></script>
   <script>
   function loadEquipmentList(items) {
     const list = document.getElementById("equipmentList");
