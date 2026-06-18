@@ -175,28 +175,5 @@
 </script>
 
 <script src="https://script.google.com/macros/s/AKfycbz_qw40KJp1A68OLLDMPnebTcGIck-zvlRconsQrunedob26YE2kkW7DaRlD44dJ1yk7A/exec?id=list"></script>
-  <script>
-  function loadEquipmentList(items) {
-    const list = document.getElementById("equipmentList");
-
-    list.innerHTML = items.slice(0, 10).map(item => `
-      <a href="${item.url}" style="
-        display:block;
-        padding:14px;
-        margin:8px 0;
-        border:1px solid #ddd;
-        border-radius:10px;
-        text-decoration:none;
-        color:#111;
-        font-size:16px;
-      ">
-        <b>${item.id}</b><br>
-        ${item.name}
-      </a>
-    `).join("");
-  }
-</script>
-
-<script src="https://script.google.com/macros/s/AKfycbz_qw40KJp1A68OLLDMPnebTcGIck-zvlRconsQrunedob26YE2kkW7DaRlD44dJ1yk7A/exec?id=list"></script>
-</body>
+ </body>
 </html>
