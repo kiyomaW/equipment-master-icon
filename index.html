@@ -6,85 +6,27 @@
   <title>Equipment Master</title>
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background: #ffffff;
-    }
-
-    .page {
-      max-width: 420px;
-      margin: 0 auto;
-      padding-top: 35px;
-    }
-
-    h1 {
-      font-size: 34px;
-      margin-bottom: 28px;
-    }
-
-    h2 {
-      font-size: 20px;
-      margin-top: 28px;
-      margin-bottom: 12px;
-    }
-
-    label {
-      font-size: 15px;
-      font-weight: bold;
-    }
-
+    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #fff; }
+    .page { max-width: 420px; margin: 0 auto; padding-top: 35px; }
+    h1 { font-size: 34px; margin-bottom: 28px; }
+    h2 { font-size: 20px; margin-top: 28px; margin-bottom: 12px; }
+    label { font-size: 15px; font-weight: bold; }
     input {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 16px;
-      font-size: 18px;
-      margin-top: 8px;
-      margin-bottom: 12px;
-      border: 1px solid #bbb;
-      border-radius: 8px;
+      width: 100%; box-sizing: border-box; padding: 16px; font-size: 18px;
+      margin-top: 8px; margin-bottom: 12px; border: 1px solid #bbb; border-radius: 8px;
     }
-
-    button, .btn {
-      width: 100%;
-      box-sizing: border-box;
-      display: block;
-      padding: 18px;
-      font-size: 18px;
-      text-align: center;
-      text-decoration: none;
-      border: 0;
-      border-radius: 10px;
-      margin-top: 12px;
+    .btn {
+      width: 100%; box-sizing: border-box; display: block; padding: 18px;
+      font-size: 18px; text-align: center; text-decoration: none; border: 0;
+      border-radius: 10px; margin-top: 12px;
     }
-
-    .primary {
-      background: #673ab7;
-      color: white;
-    }
-
-    .dark {
-      background: #444;
-      color: white;
-    }
-
-    .light {
-      background: #eeeeee;
-      color: #111;
-    }
-
-    .note {
-      margin-top: 20px;
-      color: #666;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .section {
-      margin-top: 30px;
-      padding-top: 20px;
-      border-top: 1px solid #ddd;
+    .primary { background: #673ab7; color: white; }
+    .dark { background: #444; color: white; }
+    .section { margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; }
+    .note { margin-top: 20px; color: #666; font-size: 14px; line-height: 1.5; }
+    .card {
+      display: block; padding: 14px; margin: 8px 0; border: 1px solid #ddd;
+      border-radius: 10px; text-decoration: none; color: #111; font-size: 16px;
     }
   </style>
 </head>
@@ -93,87 +35,69 @@
   <div class="page">
     <h1>Equipment Master</h1>
 
-    <a class="btn primary" href="new.html">
-      + New Equipment
-    </a>
+    <a class="btn primary" href="new.html">+ New Equipment</a>
 
     <div class="section">
       <h2>Search Equipment</h2>
-
-<label>Equipment ID or Name</label>
-<input id="equipmentSearch" placeholder="Example: BP71, 1100, EQ0019" oninput="filterEquipment()">
-
-<div id="searchResults"></div>
+      <label>Equipment ID or Name</label>
+      <input id="equipmentSearch" placeholder="Example: BP71, 1100, EQ0019" oninput="filterEquipment()">
+      <div id="searchResults"></div>
     </div>
 
     <div class="section">
-      <a class="btn dark"
-         href="https://script.google.com/macros/s/AKfycbz_qw40KJp1A68OLLDMPnebTcGIck-zvlRconsQrunedob26YE2kkW7DaRlD44dJ1yk7A/exec?id=print">
+      <a class="btn dark" href="https://script.google.com/macros/s/AKfycbz_qw40KJp1A68OLLDMPnebTcGIck-zvlRconsQrunedob26YE2kkW7DaRlD44dJ1yk7A/exec?id=print">
         Print QR Labels
       </a>
     </div>
-<div class="section">
-  <h2>Recent Equipment</h2>
-  <div id="equipmentList">Loading...</div>
-</div>
+
+    <div class="section">
+      <h2>Recent Equipment</h2>
+      <div id="equipmentList">Loading...</div>
+    </div>
+
     <div class="note">
       Use this page to register equipment, open maintenance history, and print QR labels.
     </div>
   </div>
 
   <script>
-   let allEquipment = [];
+    let allEquipment = [];
 
-  function loadEquipmentList(items) {
-    allEquipment = items;
-
-    renderRecentEquipment(items.slice(0, 10));
-  }
-
-  function renderRecentEquipment(items) {
-    const list = document.getElementById("equipmentList");
-
-    list.innerHTML = items.map(item => equipmentCard(item)).join("");
-  }
-
-  function filterEquipment() {
-    const keyword = document.getElementById("equipmentSearch").value.trim().toLowerCase();
-    const results = document.getElementById("searchResults");
-
-    if (!keyword) {
-      results.innerHTML = "";
-      return;
+    function loadEquipmentList(items) {
+      allEquipment = items;
+      document.getElementById("equipmentList").innerHTML =
+        items.slice(0, 10).map(item => equipmentCard(item)).join("");
     }
 
-    const filtered = allEquipment.filter(item =>
-      item.id.toLowerCase().includes(keyword) ||
-      String(item.name).toLowerCase().includes(keyword)
-    ).slice(0, 10);
+    function filterEquipment() {
+      const keyword = document.getElementById("equipmentSearch").value.trim().toLowerCase();
+      const results = document.getElementById("searchResults");
 
-    results.innerHTML = filtered.length
-      ? filtered.map(item => equipmentCard(item)).join("")
-      : "<p style='color:#666;'>No equipment found.</p>";
-  }
+      if (!keyword) {
+        results.innerHTML = "";
+        return;
+      }
 
-  function equipmentCard(item) {
-    return `
-      <a href="${item.url}" style="
-        display:block;
-        padding:14px;
-        margin:8px 0;
-        border:1px solid #ddd;
-        border-radius:10px;
-        text-decoration:none;
-        color:#111;
-        font-size:16px;
-      ">
-        <b>${item.id}</b><br>
-        ${item.name}
-      </a>
-    `;
-  }
-</script>
+      const filtered = allEquipment.filter(item =>
+        item.id.toLowerCase().includes(keyword) ||
+        String(item.name).toLowerCase().includes(keyword)
+      ).slice(0, 10);
 
-<script src="https://script.google.com/macros/s/AKfycbz_qw40KJp1A68OLLDMPnebTcGIck-zvlRconsQrunedob26YE2kkW7DaRlD44dJ1yk7A/exec?id=list"></script>
- </body>
+      results.innerHTML = filtered.length
+        ? filtered.map(item => equipmentCard(item)).join("")
+        : "<p style='color:#666;'>No equipment found.</p>";
+    }
+
+    function equipmentCard(item) {
+      return `
+        <a class="card" href="${item.url}">
+          <b>${item.id}</b><br>
+          ${item.name}
+        </a>
+      `;
+    }
+  </script>
+
+  <script src="https://script.google.com/macros/s/AKfycbz_qw40KJp1A68OLLDMPnebTcGIck-zvlRconsQrunedob26YE2kkW7DaRlD44dJ1yk7A/exec?id=list"></script>
+</body>
 </html>
