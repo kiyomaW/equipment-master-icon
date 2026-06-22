@@ -4,6 +4,27 @@
 <title>QR Label</title>
 
 <style>
+  .qr-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.qr {
+  width: 42mm;
+  height: 42mm;
+}
+
+.app-icon {
+  position: absolute;
+  width: 14mm;
+  height: 14mm;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 3mm;
+  padding: 1mm;
+}
   body {
     margin: 0;
     padding: 0;
@@ -50,7 +71,10 @@
 
 <body>
   <div class="label">
-    <img id="qr">
+    <div class="qr-wrap">
+  <img id="qr" class="qr">
+  <img src="app-icon.png" class="app-icon">
+</div>
     <div class="id" id="eq"></div>
     <div class="name" id="name"></div>
   </div>
