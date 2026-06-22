@@ -92,6 +92,12 @@ document.getElementById("name").textContent = name;
 document.getElementById("qr").src =
   "https://api.qrserver.com/v1/create-qr-code/?size=500x500&margin=4&data=" +
   encodeURIComponent(url);
+</script><script>
+window.onload = function() {
+  setTimeout(() => {
+    window.print();
+  }, 500);
+}
 </script>
 </body>
 </html>
