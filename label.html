@@ -1,0 +1,73 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QR Label</title>
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+
+  .label {
+    width: 62mm;
+    height: 100mm;
+    box-sizing: border-box;
+    padding-top: 10mm;
+    text-align: center;
+  }
+
+  img {
+    width: 42mm;
+    height: 42mm;
+  }
+
+  .id {
+    font-size: 22pt;
+    font-weight: bold;
+    margin-top: 3mm;
+  }
+
+  .name {
+    font-size: 12pt;
+    margin-top: 1mm;
+  }
+
+  @media print {
+    @page {
+      size: 62mm 100mm;
+      margin: 0;
+    }
+
+    body {
+      margin: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+  <div class="label">
+    <img id="qr">
+    <div class="id" id="eq"></div>
+    <div class="name" id="name"></div>
+  </div>
+
+<script>
+const p = new URLSearchParams(location.search);
+
+const eq = p.get("eq");
+const name = p.get("name");
+const url = p.get("url");
+
+document.getElementById("eq").textContent = eq;
+document.getElementById("name").textContent = name;
+
+document.getElementById("qr").src =
+  "https://api.qrserver.com/v1/create-qr-code/?size=500x500&margin=4&data=" +
+  encodeURIComponent(url);
+</script>
+</body>
+</html>
