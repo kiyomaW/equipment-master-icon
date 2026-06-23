@@ -5,53 +5,61 @@
 
 <style>
   body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.label {
+  width: 62mm;
+  height: 100mm;
+  box-sizing: border-box;
+  padding-top: 10mm;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.qr {
+  width: 38mm;
+  height: 38mm;
+  display: block;
+  margin: 0 auto;
+}
+
+.name {
+  width: 54mm;
+  margin: 6mm auto 0 auto;
+  font-size: 16pt;
+  font-weight: bold;
+  line-height: 1.15;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.line {
+  width: 42mm;
+  border-top: 1px solid #000;
+  margin: 5mm auto 3mm auto;
+}
+
+.id {
+  font-size: 16pt;
+  font-weight: bold;
+}
+
+@media print {
+  @page {
+    size: 62mm 100mm;
     margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    text-align: center;
   }
 
-  .label {
-    width: 62mm;
-    height: 100mm;
-    box-sizing: border-box;
-    padding-top: 12mm;
-    padding-left: 3mm;
-    text-align: center;
+  body {
+    margin: 0;
   }
-
-  .qr {
-    width: 38mm;
-    height: 38mm;
-  }
-
-  .name {
-    font-size: 20pt;
-    font-weight: bold;
-    margin-top: 7mm;
-  }
-
-  .line {
-    width: 42mm;
-    border-top: 1px solid #000;
-    margin: 6mm auto 4mm auto;
-  }
-
-  .id {
-    font-size: 16pt;
-    font-weight: bold;
-  }
-
-  @media print {
-    @page {
-      size: 62mm 100mm;
-      margin: 0;
-    }
-
-    body {
-      margin: 0;
-    }
-  }
+}
 </style>
 </head>
 
