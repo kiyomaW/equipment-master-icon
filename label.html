@@ -4,27 +4,6 @@
 <title>QR Label</title>
 
 <style>
-  .qr-wrap {
-  position: relative;
-  display: inline-block;
-}
-
-.qr {
-  width: 42mm;
-  height: 42mm;
-}
-
-.app-icon {
-  position: absolute;
-  width: 14mm;
-  height: 14mm;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  border-radius: 3mm;
-  padding: 1mm;
-}
   body {
     margin: 0;
     padding: 0;
@@ -36,24 +15,30 @@
     width: 62mm;
     height: 100mm;
     box-sizing: border-box;
-    padding-top: 10mm;
+    padding-top: 12mm;
     text-align: center;
   }
 
-  img {
-    width: 42mm;
-    height: 42mm;
-  }
-
-  .id {
-    font-size: 22pt;
-    font-weight: bold;
-    margin-top: 3mm;
+  .qr {
+    width: 38mm;
+    height: 38mm;
   }
 
   .name {
-    font-size: 12pt;
-    margin-top: 1mm;
+    font-size: 20pt;
+    font-weight: bold;
+    margin-top: 7mm;
+  }
+
+  .line {
+    width: 42mm;
+    border-top: 1px solid #000;
+    margin: 6mm auto 4mm auto;
+  }
+
+  .id {
+    font-size: 16pt;
+    font-weight: bold;
   }
 
   @media print {
@@ -71,12 +56,13 @@
 
 <body>
   <div class="label">
-    <div class="qr-wrap">
-  <img id="qr" class="qr">
-  <img src="app-icon.png" class="app-icon">
-</div>
-    <div class="id" id="eq"></div>
+    <img id="qr" class="qr">
+
     <div class="name" id="name"></div>
+
+    <div class="line"></div>
+
+    <div class="id" id="eq"></div>
   </div>
 
 <script>
@@ -90,9 +76,9 @@ document.getElementById("eq").textContent = eq;
 document.getElementById("name").textContent = name;
 
 document.getElementById("qr").src =
-  "https://api.qrserver.com/v1/create-qr-code/?size=500x500&margin=4&data=" +
+  "https://api.qrserver.com/v1/create-qr-code/?size=500x500&margin=8&data=" +
   encodeURIComponent(url);
-</script><script>
+
 window.onload = function() {
   setTimeout(() => {
     window.print();
